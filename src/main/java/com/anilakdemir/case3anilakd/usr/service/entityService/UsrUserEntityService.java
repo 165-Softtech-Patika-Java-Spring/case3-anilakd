@@ -7,6 +7,7 @@ import com.anilakdemir.case3anilakd.usr.entity.UsrUser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author anilakdemir
@@ -20,5 +21,9 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
 
     public List<UsrUser> findAll () {
         return getDao().findAll();
+    }
+
+    public Optional<UsrUser> findById(Long id){
+        return getDao().findById(id);
     }
 }
