@@ -44,4 +44,8 @@ public class BaseEntityService<E extends BaseEntity,D extends JpaRepository<E, L
 
         baseAdditionalFields.setUpdateDate(new Date());
     }
+
+    public D getDao () {
+        return dao;
+    }
 }
