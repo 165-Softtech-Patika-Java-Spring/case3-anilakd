@@ -5,7 +5,6 @@ import com.anilakdemir.case3anilakd.usr.enums.UsrUserType;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 
 /**
  * @author anilakdemir
@@ -26,7 +25,10 @@ public class UsrUser extends BaseEntity {
     @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
 
+    @Column(name = "PHONE_NUMBER",length = 11, nullable = false, unique = true)
+    private String phoneNumber;
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "USER_TYPE" , length = 30)
+    @Column(name = "USER_TYPE" , length = 30, nullable = false)
     private UsrUserType userType;
 }
