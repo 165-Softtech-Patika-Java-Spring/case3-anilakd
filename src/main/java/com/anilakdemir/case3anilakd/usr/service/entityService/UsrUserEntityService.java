@@ -114,6 +114,11 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
      * @return UsrUser
      */
     public UsrUser updateWithControl(UsrUser usrUser){
-        return saveWithControl(usrUser);
+        Long userId = usrUser.getId();
+        if(findById(userId).isPresent()){
+            return saveWithControl(usrUser);
+        }else{
+            throw new RuntimeException("User not found");
+        }
     }
 }
