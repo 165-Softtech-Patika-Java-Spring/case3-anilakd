@@ -22,7 +22,7 @@ public class UsrUserController {
 
     @PostMapping
     public ResponseEntity save(@RequestBody UsrUserSaveRequestDto usrUserSaveRequestDto){
-        UsrUserDto usrUserDto = usrUserService.save(usrUserSaveRequestDto);
+        UsrUserDto usrUserDto = usrUserService.saveWithControl(usrUserSaveRequestDto);
         return ResponseEntity.ok(usrUserDto);
     }
 
@@ -32,13 +32,13 @@ public class UsrUserController {
         return ResponseEntity.ok(usrUserDtoList);
     }
 
-    @GetMapping("/id/{id}") // users?id=5 /user/id
+    @GetMapping("/id/{id}")
     public ResponseEntity getById(@PathVariable Long id){
         UsrUserDto usrUserDto = usrUserService.findById(id);
         return ResponseEntity.ok(usrUserDto);
     }
 
-    @GetMapping("/username/{username}") //users?username=anil /user/username
+    @GetMapping("/username/{username}")
     public ResponseEntity getByUsername(@PathVariable String username){
         UsrUserDto usrUserDto = usrUserService.findByUsername(username);
         return ResponseEntity.ok(usrUserDto);
@@ -52,7 +52,7 @@ public class UsrUserController {
 
     @PutMapping
     public ResponseEntity updateUsrUser(@RequestBody UsrUserUpdateRequestDto usrUserUpdateRequestDto){
-        UsrUserDto usrUserDto = usrUserService.update(usrUserUpdateRequestDto);
+        UsrUserDto usrUserDto = usrUserService.updateWithControl(usrUserUpdateRequestDto);
         return ResponseEntity.ok(usrUserDto);
     }
 
