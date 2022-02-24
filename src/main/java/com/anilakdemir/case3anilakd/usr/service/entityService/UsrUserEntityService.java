@@ -19,15 +19,20 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
         super(dao);
     }
 
+    /**
+     * if there is an existing user with username, email and phoneNumber it will throw an exception
+     * otherwise, it will save the usrUser
+     * @param usrUser
+     * @return
+     */
     public UsrUser saveWithControl(UsrUser usrUser){
         String username = usrUser.getUsername();
         String email = usrUser.getEmail();
         String phoneNumber = usrUser.getPhoneNumber();
 
         boolean isValidSaveRequest = !existsByUsernameOrEmailOrPhoneNumber(username, email, phoneNumber);
-
         if(isValidSaveRequest){
-            usrUser = getDao().save(usrUser);
+            usrUser = save(usrUser);
             return usrUser;
         }else{
             throw new RuntimeException("Already Exist"); // TODO: Handle exception
@@ -120,29 +125,17 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
     }
 
     /**
-     * if there is an existing user, it will return true
-     * @param id
-     * @return boolean
-     */
-    public boolean existById(Long id){
-        return getDao().existsById(id);
-    }
-
-    /**
      * if there is an existing user,
      * it will be updated.
      * otherwise the function will throw an exception.
      * @param usrUser
      * @return UsrUser
      */
-    public UsrUser update(UsrUser usrUser){
-        Long userId = usrUser.getId();
-
-        if(existById(userId)){
-            usrUser = save(usrUser);
-            return  usrUser;
-        }else{
-            throw new RuntimeException("User not found"); // TODO: Handle exception
+    public UsrUser updateWithControl (UsrUser usrUser){
+        try{
+            return save(usrUser);
+        }catch (Exception exception){
+            throw new RuntimeException("Already exists");
         }
     }
 
