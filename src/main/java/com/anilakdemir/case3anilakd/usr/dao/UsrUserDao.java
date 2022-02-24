@@ -14,8 +14,6 @@ public interface UsrUserDao extends JpaRepository<UsrUser, Long> {
 
     Optional<UsrUser> findByUsername (String username);
 
-    boolean existsByUsernameOrEmailOrPhoneNumber(String username, String email, String phoneNumber);
-
     boolean existsByUsernameAndPhoneNumber(String username, String phoneNumber);
 
     void deleteByUsernameAndPhoneNumber(String username, String phoneNumber);

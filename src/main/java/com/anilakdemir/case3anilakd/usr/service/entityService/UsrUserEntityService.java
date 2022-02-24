@@ -26,16 +26,10 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
      * @return
      */
     public UsrUser saveWithControl(UsrUser usrUser){
-        String username = usrUser.getUsername();
-        String email = usrUser.getEmail();
-        String phoneNumber = usrUser.getPhoneNumber();
-
-        boolean isValidSaveRequest = !existsByUsernameOrEmailOrPhoneNumber(username, email, phoneNumber);
-        if(isValidSaveRequest){
-            usrUser = save(usrUser);
-            return usrUser;
-        }else{
-            throw new RuntimeException("Already Exist"); // TODO: Handle exception
+        try{
+            return save(usrUser);
+        }catch (Exception exception){
+            throw new RuntimeException("Already exists");
         }
     }
 
@@ -43,7 +37,7 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
      * it returns all UsrUser objects from database
      * @return List<UsrUser>
      */
-    public List<UsrUser> findAll () {
+    public List<UsrUser> findAll() {
         return getDao().findAll();
     }
 
@@ -62,7 +56,7 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
      * @param id
      * @return UsrUser
      */
-    public UsrUser getByIdWithControl (Long id) {
+    public UsrUser getByIdWithControl(Long id) {
 
         Optional<UsrUser> optionalUsrUser = findById(id);
 
@@ -91,7 +85,7 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
      * @param username
      * @return UsrUser
      */
-    public UsrUser getByUsernameWithControl(String username){
+    public UsrUser getByUsername(String username){
         return findByUsername(username).orElseThrow(()->new RuntimeException("User not found"));// TODO: Handle Exception
     }
 
@@ -102,7 +96,7 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
      * @param phoneNumber
      */
     @Transactional
-    public void deleteByUsernameAndPhoneNumber (String username, String phoneNumber){
+    public void deleteByUsernameAndPhoneNumber(String username, String phoneNumber){
         boolean isExist = getDao().existsByUsernameAndPhoneNumber(username, phoneNumber);
 
         if(isExist){
@@ -113,30 +107,13 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
     }
 
     /**
-     * If there is a existing user with the username, the mail and the phone number,
-     * it returns true
-     * @param username
-     * @param email
-     * @param phoneNumber
-     * @return boolean
-     */
-    public boolean existsByUsernameOrEmailOrPhoneNumber(String username, String email, String phoneNumber){
-        return getDao().existsByUsernameOrEmailOrPhoneNumber(username, email, phoneNumber);
-    }
-
-    /**
      * if there is an existing user,
      * it will be updated.
      * otherwise the function will throw an exception.
      * @param usrUser
      * @return UsrUser
      */
-    public UsrUser updateWithControl (UsrUser usrUser){
-        try{
-            return save(usrUser);
-        }catch (Exception exception){
-            throw new RuntimeException("Already exists");
-        }
+    public UsrUser updateWithControl(UsrUser usrUser){
+        return saveWithControl(usrUser);
     }
-
 }

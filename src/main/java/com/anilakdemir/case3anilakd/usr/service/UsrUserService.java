@@ -47,7 +47,7 @@ public class UsrUserService {
      * @return UsrUserDto
      */
     public UsrUserDto findByUsername(String username){
-        UsrUser usrUser = usrUserEntityService.getByUsernameWithControl(username);
+        UsrUser usrUser = usrUserEntityService.getByUsername(username);
         UsrUserDto usrUserDto = UsrUserMapper.INSTANCE.convertToUsrUserDto(usrUser);
         return usrUserDto;
     }
