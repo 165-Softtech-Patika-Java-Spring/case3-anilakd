@@ -2,6 +2,7 @@ package com.anilakdemir.case3anilakd.usr.converter;
 
 import com.anilakdemir.case3anilakd.usr.dto.UsrUserDto;
 import com.anilakdemir.case3anilakd.usr.dto.UsrUserSaveRequestDto;
+import com.anilakdemir.case3anilakd.usr.dto.UsrUserUpdateRequestDto;
 import com.anilakdemir.case3anilakd.usr.entity.UsrUser;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -22,4 +23,6 @@ public interface UsrUserMapper {
     UsrUserDto convertToUsrUserDto(UsrUser usrUser);
 
     UsrUser convertToUsrUser(UsrUserSaveRequestDto usrUserSaveRequestDto);
+
+    UsrUser convertToUsrUser(UsrUserUpdateRequestDto usrUserUpdateRequestDto);
 }
