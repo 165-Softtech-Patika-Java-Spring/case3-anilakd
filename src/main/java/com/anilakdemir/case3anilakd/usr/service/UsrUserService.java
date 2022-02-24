@@ -70,7 +70,7 @@ public class UsrUserService {
      * @param username
      * @param phoneNumber
      */
-    public void deleteByUsernameAndPhoneNumber (String username, String phoneNumber){
+    public void deleteByUsernameAndPhoneNumber(String username, String phoneNumber){
         usrUserEntityService.deleteByUsernameAndPhoneNumber(username, phoneNumber);
     }
 
@@ -80,18 +80,12 @@ public class UsrUserService {
      * @param usrUserUpdateRequestDto
      * @return UsrUserDto
      */
-    public UsrUserDto update(UsrUserUpdateRequestDto usrUserUpdateRequestDto){
+    public UsrUserDto updateWithControl(UsrUserUpdateRequestDto usrUserUpdateRequestDto){
         UsrUser usrUser = UsrUserMapper.INSTANCE.convertToUsrUser(usrUserUpdateRequestDto);
-        usrUser = usrUserEntityService.update(usrUser);
+        usrUser = usrUserEntityService.updateWithControl(usrUser);
         UsrUserDto usrUserDto = UsrUserMapper.INSTANCE.convertToUsrUserDto(usrUser);
 
         return usrUserDto;
     }
 
-    public UsrUserDto save (UsrUserSaveRequestDto usrUserSaveRequestDto) {
-        UsrUser usrUser = UsrUserMapper.INSTANCE.convertToUsrUser(usrUserSaveRequestDto);
-        usrUser = usrUserEntityService.save(usrUser);
-        UsrUserDto usrUserDto = UsrUserMapper.INSTANCE.convertToUsrUserDto(usrUser);
-        return usrUserDto;
-    }
 }
