@@ -13,10 +13,9 @@ import java.util.Date;
  */
 @Service
 @RequiredArgsConstructor
-public class BaseEntityService<E extends BaseEntity,D extends JpaRepository<E, Long>> {
+public abstract class BaseEntityService<E extends BaseEntity,D extends JpaRepository<E, Long>> {
 
     private final D dao;
-
 
     public E save(E entity){
         setAdditionalFields(entity);
@@ -28,7 +27,6 @@ public class BaseEntityService<E extends BaseEntity,D extends JpaRepository<E, L
     /**
      * When object is created, baseAdditional field will be created and createDate will be set
      * When object is updated, updateDate will be set
-     * @param entity
      */
     private void setAdditionalFields (E entity) {
         BaseAdditionalFields baseAdditionalFields = entity.getBaseAdditionalFields();
