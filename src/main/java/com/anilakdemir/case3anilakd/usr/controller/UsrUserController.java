@@ -36,7 +36,7 @@ public class UsrUserController {
     }
 
     @Operation(summary = "Find user by id")
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity getById(@PathVariable Long id){
         UsrUserDto usrUserDto = usrUserService.findById(id);
         return ResponseEntity.ok(usrUserDto);
