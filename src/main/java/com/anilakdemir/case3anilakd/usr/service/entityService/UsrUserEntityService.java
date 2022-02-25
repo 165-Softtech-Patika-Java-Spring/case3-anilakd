@@ -22,8 +22,6 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
     /**
      * if there is an existing user with username, email and phoneNumber it will throw an exception
      * otherwise, it will save the usrUser
-     * @param usrUser
-     * @return
      */
     public UsrUser saveWithControl(UsrUser usrUser){
         try{
@@ -43,7 +41,6 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
 
     /**
      * it returns UsrUser by id parameter.
-     * @param id
      * @return Optional<UsrUser>
      */
     public Optional<UsrUser> findById(Long id){
@@ -51,9 +48,16 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
     }
 
     /**
+     * if there is an existing UsrUser,
+     * it returns true
+     */
+    public boolean existById(Long id){
+        return getDao().existsById(id);
+    }
+
+    /**
      * it returns UsrUser by id parameter from database,
      * if there is no UsrUser it throws exception.
-     * @param id
      * @return UsrUser
      */
     public UsrUser getByIdWithControl(Long id) {
@@ -72,7 +76,6 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
 
     /**
      * it returns UsrUser from database by username parameter
-     * @param username
      * @return Optional<UsrUser>
      */
     public Optional<UsrUser> findByUsername(String username){
@@ -82,7 +85,6 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
     /**
      * findByUsername(username) methods return Optional.
      * if Optional is null it throws exception.
-     * @param username
      * @return UsrUser
      */
     public UsrUser getByUsername(String username){
@@ -92,8 +94,6 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
     /**
      * if there is an existing user with parameters, the user will be deleted.
      * if there is no existing user the function will throw an exception.
-     * @param username
-     * @param phoneNumber
      */
     @Transactional
     public void deleteByUsernameAndPhoneNumber(String username, String phoneNumber){
@@ -108,14 +108,15 @@ public class UsrUserEntityService extends BaseEntityService<UsrUser, UsrUserDao>
 
     /**
      * if there is an existing user,
-     * it will be updated.
+     * it will be updated,
      * otherwise the function will throw an exception.
-     * @param usrUser
      * @return UsrUser
      */
     public UsrUser updateWithControl(UsrUser usrUser){
         Long userId = usrUser.getId();
-        if(findById(userId).isPresent()){
+        boolean isExist = existById(userId);
+
+        if(isExist){
             return saveWithControl(usrUser);
         }else{
             throw new RuntimeException("User not found");
