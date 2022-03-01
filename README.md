@@ -1,5 +1,7 @@
 # Case3
 
+![alt-text](src/main/resources/images/case3.jpg)
+
 Bir online alışveriş sitesinin kullanıcı yorumlarını yöneten bir api yazınız.
 
 - Bir kullanıcının sadece bir e-maili ve bir telefon numarası olabilir.
@@ -45,4 +47,4 @@ Bir online alışveriş sitesinin kullanıcı yorumlarını yöneten bir api yaz
 
 Yukarıdaki hiçbir servis Persistance nesne almamalı ya da dönmemelidir. Pathlere dikkat ediniz. Dao ve entityService deki method isimlerine dikkat ediniz. Dto
 isimlendirmeleri, fieldları vs size bırakıyorum. Spring Data JPA da sorgu yazmak ile alakalı ya da otomatik sorguların nasıl yapıldığı ile alakalı da ufak bir
-araştırma yapmanız gerekecek. 
+araştırma yapmanız gerekecek.
