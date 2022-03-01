@@ -18,14 +18,23 @@ public class CmtCommentEntityService extends BaseEntityService<CmtComment, CmtCo
         super(dao);
     }
 
+    /**
+     * it returns comment list by user id
+     */
     public List<CmtComment> findAllByUserId (Long userId) {
         return getDao().findAllByUserId(userId);
     }
 
+    /**
+     * it returns comment list by product id
+     */
     public List<CmtComment> findAllByProductId (Long productId) {
         return getDao().findAllByProductId(productId);
     }
 
+    /**
+     * it deletes comment, if there is a comment with id parameter
+     */
     public void deleteByIdWithControl (Long id) {
         boolean isExist = getDao().existsById(id);
 
