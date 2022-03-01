@@ -13,11 +13,11 @@ import java.util.Date;
  */
 @Service
 @RequiredArgsConstructor
-public abstract class BaseEntityService<E extends BaseEntity,D extends JpaRepository<E, Long>> {
+public abstract class BaseEntityService<E extends BaseEntity, D extends JpaRepository<E, Long>> {
 
     private final D dao;
 
-    public E save(E entity){
+    public E save (E entity) {
         setAdditionalFields(entity);
         entity = dao.save(entity);
         return entity;
@@ -31,12 +31,12 @@ public abstract class BaseEntityService<E extends BaseEntity,D extends JpaReposi
     private void setAdditionalFields (E entity) {
         BaseAdditionalFields baseAdditionalFields = entity.getBaseAdditionalFields();
 
-        if(baseAdditionalFields == null){
+        if (baseAdditionalFields == null){
             baseAdditionalFields = new BaseAdditionalFields();
             entity.setBaseAdditionalFields(baseAdditionalFields);
         }
 
-        if(entity.getId() == null){
+        if (entity.getId() == null){
             baseAdditionalFields.setCreateDate(new Date());
         }
 

@@ -18,11 +18,11 @@ public interface UsrUserMapper {
 
     UsrUserMapper INSTANCE = Mappers.getMapper(UsrUserMapper.class);
 
-    List<UsrUserDto> convertToUsrUserDtoList(List<UsrUser> usrUserList);
+    List<UsrUserDto> convertToUsrUserDtoList (List<UsrUser> usrUserList);
 
-    UsrUserDto convertToUsrUserDto(UsrUser usrUser);
+    UsrUserDto convertToUsrUserDto (UsrUser usrUser);
 
-    UsrUser convertToUsrUser(UsrUserSaveRequestDto usrUserSaveRequestDto);
+    UsrUser convertToUsrUser (UsrUserSaveRequestDto usrUserSaveRequestDto);
 
-    UsrUser convertToUsrUser(UsrUserUpdateRequestDto usrUserUpdateRequestDto);
+    UsrUser convertToUsrUser (UsrUserUpdateRequestDto usrUserUpdateRequestDto);
 }

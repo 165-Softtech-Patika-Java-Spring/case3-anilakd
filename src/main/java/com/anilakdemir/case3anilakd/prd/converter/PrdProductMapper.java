@@ -17,10 +17,10 @@ public interface PrdProductMapper {
 
     PrdProductMapper INSTANCE = Mappers.getMapper(PrdProductMapper.class);
 
-    PrdProduct convertToPrdProduct(PrdProductSaveRequestDto prdProductSaveRequestDto);
+    PrdProduct convertToPrdProduct (PrdProductSaveRequestDto prdProductSaveRequestDto);
 
-    PrdProductDto convertToPrdProductDto(PrdProduct product);
+    PrdProductDto convertToPrdProductDto (PrdProduct product);
 
-    List<PrdProductDto> convertToPrdProductDtoList(List<PrdProduct> prdProductList);
+    List<PrdProductDto> convertToPrdProductDtoList (List<PrdProduct> prdProductList);
 
 }
