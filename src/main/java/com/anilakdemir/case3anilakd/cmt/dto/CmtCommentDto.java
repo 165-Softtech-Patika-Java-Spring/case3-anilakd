@@ -1,0 +1,18 @@
+package com.anilakdemir.case3anilakd.cmt.dto;
+
+import lombok.Data;
+
+/**
+ * @author anilakdemir
+ */
+@Data
+public class CmtCommentDto {
+
+    private Long id;
+
+    private String content;
+
+    private Long productId;
+
+    private Long userId;
+}
