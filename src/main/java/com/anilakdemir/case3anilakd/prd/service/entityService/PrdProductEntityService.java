@@ -21,10 +21,17 @@ public class PrdProductEntityService extends BaseEntityService<PrdProduct, PrdPr
         super(dao);
     }
 
+    /**
+     * it returns product list
+     */
     public List<PrdProduct> findAll () {
         return getDao().findAll();
     }
 
+    /**
+     * it deletes if there is product with id parameter,
+     * otherwise throws an exception
+     */
     @Transactional
     public void deleteByIdWithControl (Long id) {
         boolean isExist = getDao().existsById(id);
@@ -36,30 +43,35 @@ public class PrdProductEntityService extends BaseEntityService<PrdProduct, PrdPr
         }
     }
 
+    /**
+     * it returns Optional<PrdProduct> by id
+     */
     public Optional<PrdProduct> findById (Long id) {
         return getDao().findById(id);
     }
 
+    /**
+     * it returns PrdProduct, if there is no PrdProduct with id, it throws an exception
+     */
     public PrdProduct getByIdWithControl(Long id){
         PrdProduct prdProduct = findById(id).orElseThrow(()->new PrdProductNotFoundException());
         return prdProduct;
     }
 
+    /**
+     * it returns true if there is a PrdProduct with id
+     */
     public boolean existById (Long id) {
         return getDao().existsById(id);
     }
 
+    /**
+     * it sets new price and save
+     */
     public PrdProduct updatePrice (Long id, BigDecimal price) {
-        boolean isExist = existById(id);
-
-        if (isExist){
-            PrdProduct prdProduct = findById(id).get();
-            prdProduct.setPrice(price);
-            prdProduct = save(prdProduct);
-            return prdProduct;
-        }else{
-            throw new PrdProductNotFoundException();
-        }
-
+        PrdProduct prdProduct = getByIdWithControl(id);
+        prdProduct.setPrice(price);
+        prdProduct = save(prdProduct);
+        return prdProduct;
     }
 }
