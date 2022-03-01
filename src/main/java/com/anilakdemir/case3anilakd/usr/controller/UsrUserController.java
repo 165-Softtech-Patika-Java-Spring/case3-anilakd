@@ -44,7 +44,7 @@ public class UsrUserController {
     }
 
     @Operation(summary = "Find user by username")
-    @GetMapping("/username/{username}")
+    @GetMapping("/by/username/{username}")
     public ResponseEntity getByUsername (@PathVariable String username) {
         UsrUserDto usrUserDto = usrUserService.findByUsername(username);
         return ResponseEntity.ok(RestResponse.of(usrUserDto));
