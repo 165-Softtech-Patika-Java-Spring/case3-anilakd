@@ -21,14 +21,14 @@ public class CmtCommentController {
     private final CmtCommentService cmtCommentService;
 
     @Operation(summary = "Get all comments by user id")
-    @GetMapping("/users/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity getAllByUserId (@PathVariable Long userId) {
         List<CmtCommentDto> cmtCommentDtoList = cmtCommentService.findAllByUserId(userId);
         return ResponseEntity.ok(cmtCommentDtoList);
     }
 
     @Operation(summary = "Get all comments by product id")
-    @GetMapping("/products/{productId}")
+    @GetMapping("/product/{productId}")
     public ResponseEntity getAllByProductId (@PathVariable Long productId) {
         List<CmtCommentDto> cmtCommentDtoList = cmtCommentService.findAllByProductId(productId);
         return ResponseEntity.ok(cmtCommentDtoList);
