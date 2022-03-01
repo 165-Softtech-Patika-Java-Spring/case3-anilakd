@@ -3,6 +3,7 @@ package com.anilakdemir.case3anilakd.prd.service.entityService;
 import com.anilakdemir.case3anilakd.gen.service.BaseEntityService;
 import com.anilakdemir.case3anilakd.prd.dao.PrdProductDao;
 import com.anilakdemir.case3anilakd.prd.entity.PrdProduct;
+import com.anilakdemir.case3anilakd.prd.exception.PrdProductNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,30 +21,35 @@ public class PrdProductEntityService extends BaseEntityService<PrdProduct, PrdPr
         super(dao);
     }
 
-    public List<PrdProduct> findAll(){
+    public List<PrdProduct> findAll () {
         return getDao().findAll();
     }
 
     @Transactional
-    public void deleteByIdWithControl(Long id){
+    public void deleteByIdWithControl (Long id) {
         boolean isExist = getDao().existsById(id);
 
         if (isExist){
             getDao().deleteById(id);
         }else{
-            throw new RuntimeException("Product not found");
+            throw new PrdProductNotFoundException();
         }
     }
 
-    public Optional<PrdProduct> findById(Long id){
+    public Optional<PrdProduct> findById (Long id) {
         return getDao().findById(id);
     }
 
-    public boolean existById(Long id){
+    public PrdProduct getByIdWithControl(Long id){
+        PrdProduct prdProduct = findById(id).orElseThrow(()->new PrdProductNotFoundException());
+        return prdProduct;
+    }
+
+    public boolean existById (Long id) {
         return getDao().existsById(id);
     }
 
-    public PrdProduct updatePrice(Long id, BigDecimal price){
+    public PrdProduct updatePrice (Long id, BigDecimal price) {
         boolean isExist = existById(id);
 
         if (isExist){
@@ -52,7 +58,7 @@ public class PrdProductEntityService extends BaseEntityService<PrdProduct, PrdPr
             prdProduct = save(prdProduct);
             return prdProduct;
         }else{
-            throw new RuntimeException("Product not found");
+            throw new PrdProductNotFoundException();
         }
 
     }
